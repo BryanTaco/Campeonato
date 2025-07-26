@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados del Torneo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Probabilidades del Torneo</h1>
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Volver al Inicio
+        </a>
+        
+        <div class="teams-display">
+            <div class="team-display" id="team1Display">
+                <div class="team-header">
+                    <i class="fas fa-shield-alt"></i>
+                    <h2 id="team1NameDisplay">Equipo Local</h2>
+                </div>
+                <div class="players-container" id="team1PlayersDisplay"></div>
+                <div class="team-stats">
+                    <p><i class="fas fa-tachometer-alt"></i> Habilidad total: <span id="team1TotalSkill">0</span></p>
+                    <p><i class="fas fa-user-friends"></i> Jugadores: <span id="team1PlayerCount">0</span></p>
+                </div>
+            </div>
+            
+            <div class="vs-circle">
+                <span>VS</span>
+            </div>
+            
+            <div class="team-display" id="team2Display">
+                <div class="team-header">
+                    <i class="fas fa-shield-alt"></i>
+                    <h2 id="team2NameDisplay">Equipo Visitante</h2>
+                </div>
+                <div class="players-container" id="team2PlayersDisplay"></div>
+                <div class="team-stats">
+                    <p><i class="fas fa-tachometer-alt"></i> Habilidad total: <span id="team2TotalSkill">0</span></p>
+                    <p><i class="fas fa-user-friends"></i> Jugadores: <span id="team2PlayerCount">0</span></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="probability-result">
+            <h2><i class="fas fa-chart-pie"></i> Probabilidades de Victoria</h2>
+            <div class="probability-bars">
+                <div class="probability-bar">
+                    <div class="team-info">
+                        <div class="team-name" id="probTeam1Name">Equipo Local</div>
+                        <div class="percentage" id="team1Percent">0%</div>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-fill" id="team1Bar"></div>
+                    </div>
+                </div>
+                
+                <div class="probability-bar">
+                    <div class="team-info">
+                        <div class="team-name" id="probTeam2Name">Equipo Visitante</div>
+                        <div class="percentage" id="team2Percent">0%</div>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-fill" id="team2Bar"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <button onclick="recalculate()" class="recalculate-btn">
+                <i class="fas fa-sync-alt"></i> Recalcular Probabilidades
+            </button>
+        </div>
+    </div>
+</body>
+</html>

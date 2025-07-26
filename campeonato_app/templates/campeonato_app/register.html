@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Equipos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Equipos</h1>
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Volver al Inicio
+        </a>
+        
+        <div class="teams-container">
+            <div class="team-form">
+                <div class="team-header">
+                    <i class="fas fa-shield-alt"></i>
+                    <h2>Equipo Local</h2>
+                </div>
+                <input type="text" id="team1Name" placeholder="Nombre del equipo local" required>
+                
+                <h3><i class="fas fa-users"></i> Jugadores</h3>
+                <div id="team1Players">
+                    <div class="player-input">
+                        <input type="text" placeholder="Nombre del jugador" class="player-name" required>
+                        <input type="number" placeholder="Habilidad (1-100)" min="1" max="100" class="player-skill" required>
+                        <button class="remove-player" onclick="removePlayer(this)">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <button onclick="addPlayer('team1Players')" class="add-player-btn">
+                    <i class="fas fa-plus"></i> Agregar Jugador
+                </button>
+            </div>
+            
+            <div class="team-form">
+                <div class="team-header">
+                    <i class="fas fa-shield-alt"></i>
+                    <h2>Equipo Visitante</h2>
+                </div>
+                <input type="text" id="team2Name" placeholder="Nombre del equipo visitante" required>
+                
+                <h3><i class="fas fa-users"></i> Jugadores</h3>
+                <div id="team2Players">
+                    <div class="player-input">
+                        <input type="text" placeholder="Nombre del jugador" class="player-name" required>
+                        <input type="number" placeholder="Habilidad (1-100)" min="1" max="100" class="player-skill" required>
+                        <button class="remove-player" onclick="removePlayer(this)">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <button onclick="addPlayer('team2Players')" class="add-player-btn">
+                    <i class="fas fa-plus"></i> Agregar Jugador
+                </button>
+            </div>
+        </div>
+        
+        <button class="save-btn" onclick="saveTeams()">
+            <i class="fas fa-save"></i> Guardar Equipos
+        </button>
+    </div>
+</body>
+</html>
