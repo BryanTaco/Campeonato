@@ -1,0 +1,23 @@
+{% load static %}
+{% extends 'campeonato_app/base.html' %}
+{% block title %}Partidos{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Partidos Programados</h2>
+  <table class="styled-table">
+    <thead>
+      <tr><th>Local</th><th>Visitante</th><th>Fecha</th><th>Marcador</th></tr>
+    </thead>
+    <tbody>
+      {% for partido in partidos %}
+      <tr>
+        <td>{{ partido.equipo_local.nombre }}</td>
+        <td>{{ partido.equipo_visitante.nombre }}</td>
+        <td>{{ partido.fecha }}</td>
+        <td>{{ partido.marcador_local }} - {{ partido.marcador_visitante }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

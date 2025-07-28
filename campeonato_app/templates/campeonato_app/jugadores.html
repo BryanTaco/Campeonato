@@ -1,0 +1,23 @@
+{% load static %}
+{% extends 'campeonato_app/base.html' %}
+{% block title %}Jugadores{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Jugadores</h2>
+  <table class="styled-table">
+    <thead>
+      <tr><th>Nombre</th><th>Equipo</th><th>Posición</th><th>Edad</th></tr>
+    </thead>
+    <tbody>
+      {% for jugador in jugadores %}
+      <tr>
+        <td>{{ jugador.nombre }}</td>
+        <td>{{ jugador.equipo.nombre }}</td>
+        <td>{{ jugador.posicion }}</td>
+        <td>{{ jugador.edad }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

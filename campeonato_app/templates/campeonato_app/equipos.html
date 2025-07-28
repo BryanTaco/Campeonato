@@ -1,0 +1,18 @@
+{% load static %}
+{% extends 'campeonato_app/base.html' %}
+{% block title %}Equipos{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Listado de Equipos</h2>
+  <table class="styled-table">
+    <thead>
+      <tr><th>Nombre</th><th>Categoría</th></tr>
+    </thead>
+    <tbody>
+      {% for equipo in equipos %}
+      <tr><td>{{ equipo.nombre }}</td><td>{{ equipo.categoria }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% load static %}
+{% extends 'campeonato_app/base.html' %}
+{% block title %}Mis Partidos{% endblock %}
+{% block content %}
+<h2>Mis Partidos</h2>
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th>Equipo Local</th>
+      <th>Equipo Visitante</th>
+      <th>Fecha</th>
+      <th>Marcador Local</th>
+      <th>Marcador Visitante</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for partido in partidos %}
+    <tr>
+      <td>{{ partido.equipo_local.nombre }}</td>
+      <td>{{ partido.equipo_visitante.nombre }}</td>
+      <td>{{ partido.fecha }}</td>
+      <td>{{ partido.marcador_local }}</td>
+      <td>{{ partido.marcador_visitante }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="5">No hay partidos disponibles.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

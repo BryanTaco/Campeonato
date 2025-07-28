@@ -1,0 +1,12 @@
+{% load static %}
+{% extends 'campeonato_app/base.html' %}
+{% block title %}Crear Equipo{% endblock %}
+{% block content %}
+<h2>Crear Equipo</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Guardar</button>
+  <a href="{% url 'equipos' %}">Cancelar</a>
+</form>
+{% endblock %}

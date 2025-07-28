@@ -1,0 +1,37 @@
+{% load static %}
+ {% extends 'campeonato_app/base.html' %}
+ {% block title %}Inicio{% endblock %}
+ {% block content %}
+ <html lang="es">
+ <head>
+     <meta charset="UTF-8">
+     <title>{% block title %}Campeonato{% endblock %}</title>
+     <link rel="stylesheet" href="{% static 'campeonato_app/css/main.css' %}">
+     <link rel="stylesheet" href="{% static 'campeonato_app/css/table.css' %}">
+     <script src="{% static 'campeonato_app/js/validate.js' %}"></script>
+     <script src="{% static 'campeonato_app/js/dynamic.js' %}"></script>
+ </head>
+ <body>
+ <header>
+     <h1>Campeonato de Fútbol</h1>
+     <nav>
+         <a href="{% url 'home' %}">Inicio</a>
+         <a href="{% url 'equipos' %}">Equipos</a>
+         <a href="{% url 'jugadores' %}">Jugadores</a>
+         <a href="{% url 'partidos' %}">Partidos</a>
+         <a href="{% url 'reportes' %}">Reportes</a>
+     </nav>
+ </header>
+ <main>
+     {% block content %}{% endblock %}
+{% extends 'campeonato_app/base.html' %}
+{% block title %}Editar Equipo{% endblock %}
+{% block content %}
+<h2>Editar Equipo</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Actualizar</button>
+  <a href="{% url 'equipos' %}">Cancelar</a>
+</form>
+{% endblock %}
