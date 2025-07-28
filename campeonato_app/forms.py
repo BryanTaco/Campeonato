@@ -1,5 +1,7 @@
 from django import forms
 from .models import Equipo, Jugador, Partido
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 class EquipoForm(forms.ModelForm):
     class Meta:
@@ -15,3 +17,10 @@ class PartidoForm(forms.ModelForm):
     class Meta:
         model = Partido
         fields = '__all__'
+
+class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']

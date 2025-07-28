@@ -1,30 +1,52 @@
 {% load static %}
+{% load crispy_forms_tags %}
 {% extends 'campeonato_app/base.html' %}
-{% block title %}Inicio{% endblock %}
+{% block title %}Login{% endblock %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Campeonato{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'campeonato_app/css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'campeonato_app/css/table.css' %}">
-    <script src="{% static 'campeonato_app/js/validate.js' %}"></script>
-    <script src="{% static 'campeonato_app/js/dynamic.js' %}"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Gestor de Campeonatos{% endblock %}</title>
+    
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="{% static 'campeonato_app/css/styles.css' %}" />
+    
+    <!-- Puedes agregar más archivos CSS aquí -->
+    
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
-<header>
-    <h1>Campeonato de Fútbol</h1>
-    <nav>
-        <a href="{% url 'home' %}">Inicio</a>
-        <a href="{% url 'equipos' %}">Equipos</a>
-        <a href="{% url 'jugadores' %}">Jugadores</a>
-        <a href="{% url 'partidos' %}">Partidos</a>
-        <a href="{% url 'reportes' %}">Reportes</a>
-    </nav>
-</header>
-<main>
-    {% block content %}{% endblock %}
-</main>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="{% url 'inicio' %}" class="logo">Campeonatos Fútbol</a>
+                <ul class="nav-links">
+                    <li><a href="{% url 'equipos' %}">Equipos</a></li>
+                    <li><a href="{% url 'jugadores' %}">Jugadores</a></li>
+                    <li><a href="{% url 'partidos' %}">Partidos</a></li>
+                    <li><a href="{% url 'estadisticas' %}">Estadísticas</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block content %}
+        <!-- Contenido específico de cada página -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Campeonato de Fútbol - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <!-- JS principal -->
+    <script src="{% static 'campeonato_app/js/main.js' %}"></script>
+    
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

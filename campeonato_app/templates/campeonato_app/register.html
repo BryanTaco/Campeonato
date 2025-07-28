@@ -1,0 +1,71 @@
+{% extends 'campeonato_app/base.html' %}
+{% load static %}
+{% block title %}Registro{% endblock %}
+{% block content %}
+<div class="card register-card">
+  <h2>Crear Cuenta</h2>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary animated-button">Registrarse</button>
+  </form>
+  <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+</div>
+
+<style>
+.register-card {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.register-card h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.register-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-card input {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.register-card .btn-primary {
+  background-color: #ff4500;
+  border: none;
+  padding: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-card .btn-primary:hover {
+  background-color: #e03e00;
+}
+
+.animated-button {
+  animation: pulse 2s infinite;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes pulse {
+  0%, 100% {transform: scale(1);}
+  50% {transform: scale(1.05);}
+}
+</style>
+{% endblock %}

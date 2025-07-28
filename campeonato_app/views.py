@@ -6,7 +6,11 @@ from .models import Equipo, Jugador, Partido
 from .forms import EquipoForm
 import csv
 
+from django.shortcuts import redirect
+
 def home(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     return render(request, 'campeonato_app/home.html')
 
 def user_is_admin(user):
@@ -108,6 +112,21 @@ def mis_partidos(request):
     except Jugador.DoesNotExist:
         partidos = Partido.objects.none()
     return render(request, 'campeonato_app/mis_partidos.html', {'partidos': partidos})
+
+from .forms import UserRegisterForm
+from django.contrib import messages
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Cuenta creada para {username}. Ahora puedes iniciar sesión.')
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'campeonato_app/register.html', {'form': form})
 
 def reportes(request):
     return render(request, 'campeonato_app/reportes.html')
