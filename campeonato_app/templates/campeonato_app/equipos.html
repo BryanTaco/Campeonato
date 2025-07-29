@@ -1,16 +1,30 @@
-{% load static %}
 {% extends 'campeonato_app/base.html' %}
+{% load static %}
 {% block title %}Equipos{% endblock %}
 {% block content %}
 <div class="card">
   <h2>Listado de Equipos</h2>
+  {% if user.is_authenticated and user.groups.all|length > 0 and user.groups.all.0.name == 'admin' %}
+  <a href="{% url 'crear_equipo' %}" class="btn btn-primary">Crear Equipo</a>
+  {% endif %}
   <table class="styled-table">
     <thead>
-      <tr><th>Nombre</th><th>Categoría</th></tr>
+      <tr><th>Nombre</th><th>Categoría</th><th>Acciones</th></tr>
     </thead>
     <tbody>
       {% for equipo in equipos %}
-      <tr><td>{{ equipo.nombre }}</td><td>{{ equipo.categoria }}</td></tr>
+      <tr>
+        <td>{{ equipo.nombre }}</td>
+        <td>{{ equipo.categoria }}</td>
+        {% if user.is_authenticated and user.groups.all|length > 0 and user.groups.all.0.name == 'admin' %}
+        <td>
+          <a href="{% url 'editar_equipo' equipo.id %}">Editar</a> |
+          <a href="{% url 'eliminar_equipo' equipo.id %}">Eliminar</a>
+        </td>
+        {% else %}
+        <td></td>
+        {% endif %}
+      </tr>
       {% endfor %}
     </tbody>
   </table>

@@ -1,0 +1,12 @@
+{% extends 'campeonato_app/base.html' %}
+{% load static %}
+{% block title %}Editar Jugador{% endblock %}
+{% block content %}
+<h2>Editar Jugador</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Guardar</button>
+  <a href="{% url 'jugadores' %}">Cancelar</a>
+</form>
+{% endblock %}

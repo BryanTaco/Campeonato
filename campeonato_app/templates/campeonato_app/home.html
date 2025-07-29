@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Inicio{% endblock %}
 {% block content %}
-<div class="card">
+<div class="card home-card">
   <h2>Bienvenido al Gestor de Campeonatos de Fútbol</h2>
   <p>Desde aquí puedes administrar equipos, jugadores, partidos y consultar estadísticas.</p>
   <div class="btn-group">
@@ -11,5 +11,25 @@
     <a href="{% url 'partidos' %}" class="btn btn-primary">Partidos</a>
     <a href="{% url 'reportes' %}" class="btn btn-primary">Estadísticas</a>
   </div>
+  <img src="{% static 'C:\Users\User\Desktop\Compeonato Proyecto\campeonato_app\statics\campeonato_app\img\logo.jpg' %}" alt="Versus" class="home-vs-image" />
 </div>
+
+<style>
+.home-card {
+  position: relative;
+  background: url("{% static 'campeonato_app/img/fondoapp.jpg' %}") no-repeat center center;
+  background-size: cover;
+  padding: 2rem;
+  border-radius: 15px;
+  color: #5a4a2e;
+}
+
+.home-vs-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+</style>
 {% endblock %}

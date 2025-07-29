@@ -1,0 +1,12 @@
+{% extends 'campeonato_app/base.html' %}
+{% load static %}
+{% block title %}Eliminar Jugador{% endblock %}
+{% block content %}
+<h2>Eliminar Jugador</h2>
+<p>¿Está seguro que desea eliminar al jugador {{ jugador.nombre }}?</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Eliminar</button>
+  <a href="{% url 'jugadores' %}">Cancelar</a>
+</form>
+{% endblock %}

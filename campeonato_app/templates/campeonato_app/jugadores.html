@@ -1,12 +1,15 @@
-{% load static %}
 {% extends 'campeonato_app/base.html' %}
+{% load static %}
 {% block title %}Jugadores{% endblock %}
 {% block content %}
 <div class="card">
   <h2>Jugadores</h2>
+  {% if user.is_authenticated and user.groups.all|length > 0 and user.groups.all.0.name == 'admin' %}
+  <a href="{% url 'crear_jugador' %}" class="btn btn-primary">Crear Jugador</a>
+  {% endif %}
   <table class="styled-table">
     <thead>
-      <tr><th>Nombre</th><th>Equipo</th><th>Posición</th><th>Edad</th></tr>
+      <tr><th>Nombre</th><th>Equipo</th><th>Posición</th><th>Edad</th><th>Acciones</th></tr>
     </thead>
     <tbody>
       {% for jugador in jugadores %}
@@ -15,6 +18,14 @@
         <td>{{ jugador.equipo.nombre }}</td>
         <td>{{ jugador.posicion }}</td>
         <td>{{ jugador.edad }}</td>
+        {% if user.is_authenticated and user.groups.all|length > 0 and user.groups.all.0.name == 'admin' %}
+        <td>
+          <a href="{% url 'editar_jugador' jugador.id %}">Editar</a> |
+          <a href="{% url 'eliminar_jugador' jugador.id %}">Eliminar</a>
+        </td>
+        {% else %}
+        <td></td>
+        {% endif %}
       </tr>
       {% endfor %}
     </tbody>

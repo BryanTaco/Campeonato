@@ -1,0 +1,46 @@
+/* Basic styles for Campeonato app */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff8f0;
+  color: #5a4a2e;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.navbar {
+  background-color: #e0d8c0;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar .logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #5a4a2e;
+  text-decoration: none;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar .nav-links li a {
+  color: #5a4a2e;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.navbar .nav-links li a:hover {
+  text-decoration: underline;
+}

@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from .models import Equipo, Jugador, Partido
-from .forms import EquipoForm
+from .forms import EquipoForm, JugadorForm
 import csv
 
 from django.shortcuts import redirect
@@ -99,7 +99,39 @@ def exportar_equipos_csv(request):
 
     return response
 
-from django.contrib.auth.models import User
+@login_required
+@user_passes_test(user_is_admin)
+def crear_jugador(request):
+    if request.method == 'POST':
+        form = JugadorForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('jugadores')
+    else:
+        form = JugadorForm()
+    return render(request, 'campeonato_app/crear_jugador.html', {'form': form})
+
+@login_required
+@user_passes_test(user_is_admin)
+def editar_jugador(request, jugador_id):
+    jugador = Jugador.objects.get(id=jugador_id)
+    if request.method == 'POST':
+        form = JugadorForm(request.POST, request.FILES, instance=jugador)
+        if form.is_valid():
+            form.save()
+            return redirect('jugadores')
+    else:
+        form = JugadorForm(instance=jugador)
+    return render(request, 'campeonato_app/editar_jugador.html', {'form': form})
+
+@login_required
+@user_passes_test(user_is_admin)
+def eliminar_jugador(request, jugador_id):
+    jugador = Jugador.objects.get(id=jugador_id)
+    if request.method == 'POST':
+        jugador.delete()
+        return redirect('jugadores')
+    return render(request, 'campeonato_app/eliminar_jugador.html', {'jugador': jugador})
 
 @login_required
 @user_passes_test(user_is_regular)
