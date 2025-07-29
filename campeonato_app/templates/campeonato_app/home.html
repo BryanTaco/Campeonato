@@ -5,11 +5,14 @@
 <div class="card home-card">
   <h2>Bienvenido al Gestor de Campeonatos de Fútbol</h2>
   <p>Desde aquí puedes administrar equipos, jugadores, partidos y consultar estadísticas.</p>
-  <div class="btn-group">
+<div class="btn-group">
     <a href="{% url 'equipos' %}" class="btn btn-primary">Equipos</a>
     <a href="{% url 'jugadores' %}" class="btn btn-primary">Jugadores</a>
     <a href="{% url 'partidos' %}" class="btn btn-primary">Partidos</a>
     <a href="{% url 'reportes' %}" class="btn btn-primary">Estadísticas</a>
+    {% if user.is_authenticated and user.groups.all|length > 0 and user.groups.all.0.name == 'admin' %}
+    <a href="{% url 'superuser_validation' %}" class="btn btn-warning">Validar Superusuario</a>
+    {% endif %}
   </div>
   <img src="{% static 'C:\Users\User\Desktop\Compeonato Proyecto\campeonato_app\statics\campeonato_app\img\logo.jpg' %}" alt="Versus" class="home-vs-image" />
 </div>

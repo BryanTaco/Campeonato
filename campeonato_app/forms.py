@@ -24,3 +24,10 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
+class SuperuserValidationForm(forms.Form):
+    validation_key = forms.CharField(
+        label='Clave de validación para superusuario',
+        max_length=100,
+        widget=forms.PasswordInput
+    )

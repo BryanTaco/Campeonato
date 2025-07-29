@@ -5,7 +5,7 @@
 <div class="card">
   <h2>Jugadores</h2>
   {% if user.is_authenticated and user.groups.all|length > 0 and user.groups.all.0.name == 'admin' %}
-  <a href="{% url 'crear_jugador' %}" class="btn btn-primary">Crear Jugador</a>
+  <button id="openCreateJugadorModal" class="btn btn-primary">Crear Jugador</button>
   {% endif %}
   <table class="styled-table">
     <thead>
@@ -31,4 +31,6 @@
     </tbody>
   </table>
 </div>
+
+{% include 'campeonato_app/modals.html' %}
 {% endblock %}

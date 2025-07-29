@@ -5,7 +5,7 @@
 <div class="card">
   <h2>Listado de Equipos</h2>
   {% if user.is_authenticated and user.groups.all|length > 0 and user.groups.all.0.name == 'admin' %}
-  <a href="{% url 'crear_equipo' %}" class="btn btn-primary">Crear Equipo</a>
+  <button id="openCreateEquipoModal" class="btn btn-primary">Crear Equipo</button>
   {% endif %}
   <table class="styled-table">
     <thead>
@@ -29,4 +29,6 @@
     </tbody>
   </table>
 </div>
+
+{% include 'campeonato_app/modals.html' %}
 {% endblock %}

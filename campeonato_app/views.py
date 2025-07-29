@@ -26,7 +26,12 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            # Check if user is in admin group
+            if user.groups.filter(name='admin').exists():
+                return redirect('home')
+            else:
+                # Redirect to superuser validation page if not admin
+                return redirect('superuser_validation')
         else:
             return render(request, 'campeonato_app/login.html', {'error': 'Credenciales inválidas'})
     return render(request, 'campeonato_app/login.html')
@@ -145,20 +150,43 @@ def mis_partidos(request):
         partidos = Partido.objects.none()
     return render(request, 'campeonato_app/mis_partidos.html', {'partidos': partidos})
 
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, SuperuserValidationForm
 from django.contrib import messages
+from django.contrib.auth.models import Group
 
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            # Optionally, assign user to 'regular' group by default
+            regular_group, created = Group.objects.get_or_create(name='regular')
+            user.groups.add(regular_group)
             username = form.cleaned_data.get('username')
             messages.success(request, f'Cuenta creada para {username}. Ahora puedes iniciar sesión.')
             return redirect('login')
     else:
         form = UserRegisterForm()
     return render(request, 'campeonato_app/register.html', {'form': form})
+
+@login_required
+def superuser_validation(request):
+    if request.method == 'POST':
+        form = SuperuserValidationForm(request.POST)
+        if form.is_valid():
+            key = form.cleaned_data['validation_key']
+            # Replace 'SECRET_KEY' with your actual secret key
+            if key == 'SUPERTEAM2023':
+                user = request.user
+                admin_group, created = Group.objects.get_or_create(name='admin')
+                user.groups.add(admin_group)
+                messages.success(request, 'Validación exitosa. Ahora tienes permisos de administrador.')
+                return redirect('home')
+            else:
+                messages.error(request, 'Clave de validación incorrecta.')
+    else:
+        form = SuperuserValidationForm()
+    return render(request, 'campeonato_app/superuser_validation.html', {'form': form})
 
 def reportes(request):
     return render(request, 'campeonato_app/reportes.html')

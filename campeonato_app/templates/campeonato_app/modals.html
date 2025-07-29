@@ -1,0 +1,81 @@
+<!-- Modal for creating Equipo -->
+<div id="createEquipoModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" id="closeCreateEquipoModal"><i class="fas fa-times"></i></span>
+    <h2><i class="fas fa-plus-circle"></i> Crear Equipo</h2>
+    <form id="createEquipoForm" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required>
+      <label for="categoria">Categoría:</label>
+      <input type="text" id="categoria" name="categoria" required>
+      <button type="submit"><i class="fas fa-save"></i> Guardar</button>
+    </form>
+    <div id="createEquipoMessage"></div>
+  </div>
+</div>
+
+<!-- Modal for creating Jugador -->
+<div id="createJugadorModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" id="closeCreateJugadorModal"><i class="fas fa-times"></i></span>
+    <h2><i class="fas fa-plus-circle"></i> Crear Jugador</h2>
+    <form id="createJugadorForm" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="jugador_nombre" name="nombre" required>
+      <label for="equipo">Equipo:</label>
+      <select id="equipo" name="equipo" required>
+        {% for equipo in equipos %}
+        <option value="{{ equipo.id }}">{{ equipo.nombre }}</option>
+        {% endfor %}
+      </select>
+      <label for="posicion">Posición:</label>
+      <select id="posicion" name="posicion" required>
+        <option value="">Seleccione posición</option>
+        <option value="Portero">Portero</option>
+        <option value="Defensa">Defensa</option>
+        <option value="Centrocampista">Centrocampista</option>
+        <option value="Delantero">Delantero</option>
+      </select>
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" name="edad" required>
+      <button type="submit"><i class="fas fa-save"></i> Guardar</button>
+    </form>
+    <div id="createJugadorMessage"></div>
+  </div>
+</div>
+
+<style>
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 400px;
+  border-radius: 10px;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>

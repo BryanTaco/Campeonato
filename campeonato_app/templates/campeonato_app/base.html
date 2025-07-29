@@ -8,6 +8,8 @@
     
     <!-- CSS principal -->
     <link rel="stylesheet" href="{% static 'campeonato_app/css/styles.css' %}" />
+    <!-- FontAwesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-papb+6X+6Q6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     {% block extra_head %}{% endblock %}
 </head>
@@ -32,7 +34,7 @@
         </nav>
     </header>
 
-    <main class="container" style="position: relative; background: url('{% static 'campeonato_app/img/football_icon.svg' %}') no-repeat top right; background-size: 150px 150px;">
+    <main class="container" style="position: relative; background: url('{% static "campeonato_app/img/football_icon.svg" %}') no-repeat top right; background-size: 150px 150px;">
         {% block content %}
         <!-- Contenido específico de cada página -->
         {% endblock %}

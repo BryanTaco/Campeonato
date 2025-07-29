@@ -18,4 +18,5 @@ urlpatterns = [
     path('reportes/', views.reportes, name='reportes'),
     path('equipos/exportar/csv/', views.exportar_equipos_csv, name='exportar_equipos_csv'),
     path('mis_partidos/', views.mis_partidos, name='mis_partidos'),
+    path('superuser_validation/', views.superuser_validation, name='superuser_validation'),
 ]
