@@ -5,16 +5,31 @@
 <div class="card home-card">
   <h2>Bienvenido al Gestor de Campeonatos de Fútbol</h2>
   <p>Desde aquí puedes administrar equipos, jugadores, partidos y consultar estadísticas.</p>
-<div class="btn-group">
-    <a href="{% url 'equipos' %}" class="btn btn-primary">Equipos</a>
-    <a href="{% url 'jugadores' %}" class="btn btn-primary">Jugadores</a>
-    <a href="{% url 'partidos' %}" class="btn btn-primary">Partidos</a>
-    <a href="{% url 'reportes' %}" class="btn btn-primary">Estadísticas</a>
-    {% if user.is_authenticated and user.groups.all|length > 0 and user.groups.all.0.name == 'admin' %}
-    <a href="{% url 'superuser_validation' %}" class="btn btn-warning">Validar Superusuario</a>
-    {% endif %}
-  </div>
-  <img src="{% static 'C:\Users\User\Desktop\Compeonato Proyecto\campeonato_app\statics\campeonato_app\img\logo.jpg' %}" alt="Versus" class="home-vs-image" />
+  <img src="{% static 'campeonato_app/img/logo.png' %}" alt="Versus" class="home-vs-image" />
+
+  <style>
+    .superuser-validation {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+    }
+  </style>
+  {% comment %} Removed superuser validation button from home.html as it is now in header {% endcomment %}
+
+  <section class="featured-content">
+    <h3>Últimos Partidos</h3>
+    <ul class="match-list">
+      <li><strong>Equipo A</strong> vs <strong>Equipo B</strong> - 2:1</li>
+      <li><strong>Equipo C</strong> vs <strong>Equipo D</strong> - 0:0</li>
+      <li><strong>Equipo E</strong> vs <strong>Equipo F</strong> - 3:2</li>
+    </ul>
+  </section>
+
+  <section class="news">
+    <h3>Noticias Recientes</h3>
+    <p>Próximo torneo comenzará el 15 de agosto. ¡Prepárate para la acción!</p>
+  </section>
 </div>
 
 <style>
@@ -25,10 +40,14 @@
   padding: 2rem;
   border-radius: 15px;
   color: #5a4a2e;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.5);
+  background-blend-mode: lighten;
 }
 
 .home-vs-image {
-  max-width: 100%;
+  max-width: 120px;
   height: auto;
   margin-top: 1rem;
   border-radius: 10px;

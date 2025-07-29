@@ -18,21 +18,41 @@
         <nav class="navbar">
             <div class="container">
                 <a href="{% url 'home' %}" class="logo">Campeonatos Fútbol</a>
-                <ul class="nav-links">
-                    <li><a href="{% url 'equipos' %}">Equipos</a></li>
-                    <li><a href="{% url 'jugadores' %}">Jugadores</a></li>
-                    <li><a href="{% url 'partidos' %}">Partidos</a></li>
-                    <li><a href="{% url 'reportes' %}">Estadísticas</a></li>
-                    {% if user.is_authenticated %}
-                        <li><a href="#">Hola, {{ user.username }}</a></li>
-                        <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
-                    {% else %}
-                        <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
-                    {% endif %}
-                </ul>
+    <ul class="nav-links">
+        <li><a href="{% url 'equipos' %}">Equipos</a></li>
+        <li><a href="{% url 'jugadores' %}">Jugadores</a></li>
+        <li><a href="{% url 'partidos' %}">Partidos</a></li>
+        <li><a href="{% url 'reportes' %}">Estadísticas</a></li>
+        {% if user.is_authenticated and user.groups.all|length > 0 and user.groups.all.0.name == 'admin' %}
+            <li>
+                <a href="{% url 'superuser_validation' %}" title="Validar Superusuario" class="superuser-btn">
+                    <i class="fas fa-user-shield"></i> Validar Superusuario
+                </a>
+            </li>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <li><a href="#">Hola, {{ user.username }}</a></li>
+            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+        {% endif %}
+    </ul>
             </div>
-        </nav>
-    </header>
+</nav>
+
+<style>
+.superuser-btn {
+    color: #ffc107;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+.superuser-btn i {
+    font-size: 1.1rem;
+}
+</style>
+</header>
 
     <main class="container" style="position: relative; background: url('{% static "campeonato_app/img/football_icon.svg" %}') no-repeat top right; background-size: 150px 150px;">
         {% block content %}
